@@ -80,6 +80,7 @@ section.home_banner img {
   }
 }
 
+/* 홈배너 버튼 호버 */
 .button_wrapper a {
   color: black;
   &:hover {
@@ -106,18 +107,39 @@ ul.banner_list {
   animation: bannerAnimation 15s linear infinite;
 }
 
-.banner_list img {
-  max-width: 15rem;
-  aspect-ratio: 1 / 1;
-  margin-left: 0.5rem;
-}
-
 @keyframes bannerAnimation {
   from {
     transform: translateX(0);
   }
   to {
     transform: translateX(-100%);
+  }
+}
+
+/* 무한배너 이미지 호버 */
+.banner_list img {
+  max-width: 15rem;
+  aspect-ratio: 1 / 1;
+  margin-left: 0.5rem;
+  border-radius: 10px;
+
+  &:hover {
+    animation: imgAnimation 2s infinite;
+  }
+}
+
+@keyframes imgAnimation {
+  25% {
+    transform: scale(1.2);
+    transition: all 1s;
+  }
+  50% {
+    transform: scale(1);
+    transition: all 1s;
+  }
+  75% {
+    transform: scale(1.2);
+    transition: all 1s;
   }
 }
 
