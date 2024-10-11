@@ -84,6 +84,11 @@ section.infinite_banner {
   overflow: hidden;
 }
 
+section h2 {
+  margin: 0;
+  padding: 1rem 1.5rem;
+}
+
 .banner_wrapper {
   display: flex;
 }
