@@ -144,11 +144,24 @@ ul.banner_list {
 }
 
 /* 스크롤뷰 */
+.scroll_view a {
+  margin: 1.1rem;
+  color: #af8260;
+}
+
+.scroll_list_wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .scroll_list {
   display: flex;
   gap: 0.5rem;
+
   overflow-x: scroll;
   overflow-y: none;
+
+  scroll-behavior: smooth;
 }
 
 .scroll_list img {
