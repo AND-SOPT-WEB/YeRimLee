@@ -144,11 +144,11 @@ ul.banner_list {
 }
 
 /* 스크롤뷰 */
-
 .scroll_list {
   display: flex;
   gap: 0.5rem;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: none;
 }
 
 .scroll_list img {
