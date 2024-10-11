@@ -75,10 +75,16 @@ section.home_banner img {
   background-color: #e9efec;
   opacity: 0.8;
   border-radius: 5px;
+  &:hover {
+    background-color: #243642;
+  }
 }
 
 .button_wrapper a {
   color: black;
+  &:hover {
+    color: white;
+  }
 }
 
 /* 무한배너 */
