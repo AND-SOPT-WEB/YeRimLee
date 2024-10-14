@@ -154,7 +154,6 @@ ul.banner_list {
   gap: 0.5rem;
 
   overflow-x: scroll;
-  overflow-y: none;
 
   scroll-behavior: smooth;
 }
