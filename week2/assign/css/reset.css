@@ -9,6 +9,7 @@ body {
   padding: 0;
   width: 100%;
   scroll-behavior: smooth;
+  background-color: #ffebd4;
 }
 div,
 span,
@@ -28,7 +29,6 @@ a {
   text-decoration: none;
 }
 button {
-  background: none;
   border: none;
 }
 abbr,
@@ -128,4 +128,8 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+input {
+  background: none;
+  border: none;
 }
