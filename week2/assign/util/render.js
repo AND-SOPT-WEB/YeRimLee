@@ -1,4 +1,5 @@
 import { members } from "../data.js";
+import { filterGender, getSelectedGender } from "./gender_filter.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -10,10 +11,11 @@ if (!localStorage.getItem("MEMBER_KEY")) {
 // 멤버 화면에 출력
 let memberList = JSON.parse(localStorage.getItem("MEMBER_KEY")) || [];
 
-function renderMemberList() {
-  const showMember = document.querySelector(".tbody");
+function renderMemberList(filteredMembers) {
+  const showMemberContainer = document.querySelector(".tbody");
+  showMemberContainer.innerHTML = ""; // 기존 리스트 초기화
 
-  let showMemberList = memberList.map((member) => {
+  let showMemberList = filteredMembers.map((member) => {
     return `
         <tr id=${member.id}>
         <td><input type="checkbox"></td>
@@ -27,7 +29,18 @@ function renderMemberList() {
         </tr>
         `;
   });
-  showMember.innerHTML += showMemberList.join("");
+  showMemberContainer.innerHTML += showMemberList.join("");
 }
 
-renderMemberList();
+// 전체 멤버 리스트 렌더링
+renderMemberList(memberList);
+
+// 검색 버튼을 누르면 성별에 따라 필터링된 리스트 렌더링
+const handleSearch = document.querySelector(".search_btn");
+
+handleSearch.addEventListener("click", (event) => {
+  event.preventDefault(); // form 태그 기본 속성 방지
+  const selectedGender = getSelectedGender();
+  const filteredMembers = filterGender(memberList, selectedGender);
+  renderMemberList(filteredMembers); // 필터링된 리스트 렌더링
+});
