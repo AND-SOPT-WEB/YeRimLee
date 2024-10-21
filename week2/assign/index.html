@@ -12,12 +12,14 @@
     <title>예사모 관리자 페이지</title>
   </head>
   <body>
+    <!-- 헤더영역 -->
     <header class="header">
       <i class="fa-solid fa-bars"></i>
       <h1>회원 관리 페이지</h1>
       <p>🥇예사모 1등 회원 유태승</p>
     </header>
     <main>
+      <!-- 필터 버튼 -->
       <form class="filter_section">
         <div class="name">
           <label for="name">이름</label>
@@ -50,6 +52,24 @@
         <button class="reset">초기화</button>
         <button class="search">검색</button>
       </form>
+      <!-- 테이블 리스트 -->
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" /></th>
+            <th>이름</th>
+            <th>영문이름</th>
+            <th>Github</th>
+            <th>성별</th>
+            <th>역할</th>
+            <th>1주차 금잔디</th>
+            <th>2주차 금잔디</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr></tr>
+        </tbody>
+      </table>
     </main>
   </body>
 </html>

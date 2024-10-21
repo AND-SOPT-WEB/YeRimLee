@@ -28,7 +28,7 @@
     "week1 week1 week1 week2 week2 week2"
     "reset reset reset search search search";
 
-  margin: 10rem 20rem;
+  margin: 8rem 10rem;
   padding: 1.5rem 2rem;
   background-color: #ffc6c6;
   border-radius: 5px;
@@ -102,4 +102,28 @@
 
 .search {
   background-color: #f0a8d0;
+}
+
+/* 테이블 리스트 */
+table {
+  padding: 0 10rem;
+  text-align: center;
+}
+tr {
+  display: flex;
+}
+
+th,
+td {
+  width: 100%;
+  border: 1px solid #f0a8d0;
+  padding: 0.3rem;
+}
+
+thead {
+  background-color: #f7b5ca;
+}
+
+td {
+  background-color: #fff7e6;
 }
