@@ -78,19 +78,21 @@ main {
 
   white-space: nowrap;
 
-  height: 2rem;
+  height: 3rem;
   padding: 0.8rem;
   background-color: #ffebd4;
 }
 
-.filter_section input {
+.filter_section input,
+select {
   width: 100%;
-  height: 2rem;
+  height: 3rem;
 
   background-color: #faf6f0;
 }
 
-.filter_section input:focus {
+.filter_section input,
+select:focus {
   outline: none;
 }
 
@@ -98,7 +100,7 @@ main {
   margin-top: 1rem;
 
   width: 100%;
-  height: 3rem;
+  height: 3.3rem;
 
   border-radius: 5px;
 }
