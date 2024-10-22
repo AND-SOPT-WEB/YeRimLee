@@ -1,6 +1,7 @@
 import { members } from "../data.js";
 import { filterGender, getSelectedGender } from "./genderFilter.js";
 import { filterRole, getSelectedRole } from "./roleFilter.js";
+import { filterName, getInputName } from "./nameFilter.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -42,12 +43,14 @@ const handleSearch = document.querySelector(".search_btn");
 handleSearch.addEventListener("click", (event) => {
   event.preventDefault(); // form 태그 기본 속성 방지
 
-  const selectedGender = getSelectedGender(); 
+  const selectedGender = getSelectedGender();
   const selectedRole = getSelectedRole();
+  const inputName = getInputName();
 
   // 필터링
   const filteredGender = filterGender(memberList, selectedGender);
-  const filteredMembers = filterRole(filteredGender, selectedRole);
+  const filteredRole = filterRole(filteredGender, selectedRole);
+  const filteredMembers = filterName(filteredRole, inputName);
 
   renderMemberList(filteredMembers); // 필터링된 리스트 렌더링
 });

@@ -11,6 +11,7 @@
     ></script>
     <title>예사모 관리자 페이지</title>
   </head>
+
   <body>
     <!-- 헤더영역 -->
     <header class="header">
@@ -18,12 +19,13 @@
       <h1>회원 관리 페이지</h1>
       <p>🥇예사모 1등 회원 유태승</p>
     </header>
+
     <main>
-      <!-- 필터 버튼 -->
+      <!-- 필터 -->
       <form class="filter_section">
         <div class="name">
           <label for="name">이름</label>
-          <input type="text" />
+          <input id="nameInput" type="text" />
         </div>
         <div class="en_name">
           <label for="en-name">영문이름</label>
@@ -33,7 +35,6 @@
           <label for="github">Github</label>
           <input type="text" />
         </div>
-        <!-- 성별 선택 -->
         <div class="gender">
           <label for="gender">성별</label>
           <select type="text" class="sel_gender">
@@ -58,13 +59,17 @@
           <label for="week2">2주차 금잔디조</label>
           <input type="text" />
         </div>
+        <!-- 필터 버튼 -->
         <button class="reset_btn">초기화</button>
         <button class="search_btn">검색</button>
       </form>
+
+      <!-- 리스트 버튼 -->
       <section class="list_btn">
         <button class="delete_btn">선택삭제</button>
         <button class="add_btn">추가</button>
       </section>
+
       <!-- 테이블 리스트 -->
       <table>
         <thead>
