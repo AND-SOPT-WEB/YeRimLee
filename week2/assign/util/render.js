@@ -4,6 +4,7 @@ import { filterRole, getSelectedRole } from "./roleFilter.js";
 import { filterName, getInputName } from "./nameFilter.js";
 import { filterEnName, getInputEnName } from "./enNameFilter.js";
 import { filterGithub, getInputGithub } from "./githubFilter.js";
+import { filterWeek, getInputNumber } from "./weekFilter.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -56,13 +57,21 @@ handleSearch.addEventListener("click", (event) => {
   const inputName = getInputName();
   const inputEnName = getInputEnName();
   const inputGithub = getInputGithub();
+  const inputWeek1 = getInputNumber("week1Input");
+  const inputWeek2 = getInputNumber("week2Input");
 
   // 필터링
   const filteredGender = filterGender(memberList, selectedGender);
   const filteredRole = filterRole(filteredGender, selectedRole);
   const filteredName = filterName(filteredRole, inputName);
   const filteredEnName = filterEnName(filteredName, inputEnName);
-  const filteredMembers = filterGithub(filteredEnName, inputGithub);
+  const filteredGithub = filterGithub(filteredEnName, inputGithub);
+
+  // Week1 필터링
+  const filteredWeek1 = filterWeek(filteredGithub, "week1", inputWeek1);
+
+  // Week2 필터링
+  const filteredMembers = filterWeek(filteredWeek1, "week2", inputWeek2);
 
   renderMemberList(filteredMembers); // 필터링된 리스트 렌더링
 });
