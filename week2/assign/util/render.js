@@ -3,6 +3,7 @@ import { filterGender, getSelectedGender } from "./genderFilter.js";
 import { filterRole, getSelectedRole } from "./roleFilter.js";
 import { filterName, getInputName } from "./nameFilter.js";
 import { filterEnName, getInputEnName } from "./enNameFilter.js";
+import { filterGithub, getInputGithub } from "./githubFilter.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -54,12 +55,14 @@ handleSearch.addEventListener("click", (event) => {
   const selectedRole = getSelectedRole();
   const inputName = getInputName();
   const inputEnName = getInputEnName();
+  const inputGithub = getInputGithub();
 
   // 필터링
   const filteredGender = filterGender(memberList, selectedGender);
   const filteredRole = filterRole(filteredGender, selectedRole);
   const filteredName = filterName(filteredRole, inputName);
-  const filteredMembers = filterEnName(filteredName, inputEnName);
+  const filteredEnName = filterEnName(filteredName, inputEnName);
+  const filteredMembers = filterGithub(filteredEnName, inputGithub);
 
   renderMemberList(filteredMembers); // 필터링된 리스트 렌더링
 });
