@@ -1,6 +1,6 @@
 import { members } from "../data.js";
-import { filterGender, getSelectedGender } from "./gender_filter.js";
-import { filterRole, getSelectedRole } from "./role_filter.js";
+import { filterGender, getSelectedGender } from "./genderFilter.js";
+import { filterRole, getSelectedRole } from "./roleFilter.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
