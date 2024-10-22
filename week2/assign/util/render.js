@@ -17,6 +17,12 @@ function renderMemberList(filteredMembers) {
   const showMemberContainer = document.querySelector(".tbody");
   showMemberContainer.innerHTML = ""; // 기존 리스트 초기화
 
+  // 일치하는 멤버리스트가 null인 경우
+  if (!filteredMembers || filteredMembers.length === 0) {
+    showMemberContainer.innerHTML = `<tr><td colspan="8">일치하는 회원이 없습니다.</td></tr>`;
+    return;
+  }
+
   let showMemberList = filteredMembers.map((member) => {
     return `
         <tr id=${member.id}>
