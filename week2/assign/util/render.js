@@ -1,6 +1,6 @@
 import { members } from "../data.js";
 import { getFilteringValue } from "./getFilteringValue.js";
-import { filterMembers } from "./filterMembers.js";
+import { filterMembers } from "./filter.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
