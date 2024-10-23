@@ -63,6 +63,11 @@ handleSearch.addEventListener("click", (event) => {
   const filteredMembers = memberList.filter((member) =>
     Object.entries(filters).every(([key, value]) => {
       const trimmedValue = value.trim().toLowerCase();
+      if (key === "gender") {
+        return (
+          trimmedValue === "" || member[key]?.toLowerCase() === trimmedValue
+        );
+      }
       return (
         trimmedValue === "" ||
         member[key]?.toString().toLowerCase().includes(trimmedValue)
