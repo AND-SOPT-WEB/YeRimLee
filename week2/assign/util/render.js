@@ -1,10 +1,5 @@
 import { members } from "../data.js";
-import {
-  getSelectValue,
-  getInputName,
-  getInputValue,
-  getInputNumber,
-} from "./getFilteringValue.js";
+import { getFilteringValue } from "./getFilteringValue.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -52,16 +47,19 @@ handleSearch.addEventListener("click", (event) => {
   event.preventDefault();
 
   const filters = {
-    gender: getSelectValue("sel_gender"),
-    role: getSelectValue("sel_role"),
-    name: getInputName(),
-    enName: getInputValue("enNameInput"),
-    github: getInputValue("githubInput"),
-    week1: getInputNumber("week1Input"),
-    week2: getInputNumber("week2Input"),
+    gender: getFilteringValue("selGender"),
+    role: getFilteringValue("selRole"),
+    name: getFilteringValue("nameInput"),
+    enName: getFilteringValue("enNameInput"),
+    github: getFilteringValue("githubInput"),
+    week1: getFilteringValue("week1Input"),
+    week2: getFilteringValue("week2Input"),
   };
 
   // 공백, 대소문자 구분 없이 필터링
+
+  console.log(filters); // filters 객체 확인
+  console.log(memberList); // 원본 멤버 리스트 확인
   const filteredMembers = memberList.filter((member) =>
     Object.entries(filters).every(([key, value]) => {
       const trimmedValue = value.trim().toLowerCase();
