@@ -1,8 +1,10 @@
 import { members } from "../data.js";
-import { filterGenderOrRole, getSelectValue } from "./genderOrRoleFilter.js";
-import { filterName, getInputName } from "./nameFilter.js";
-import { filterEnNameOrGit, getInputValue } from "./enNameOrGitFilter.js";
-import { filterWeek, getInputNumber } from "./weekFilter.js";
+import {
+  getSelectValue,
+  getInputName,
+  getInputValue,
+  getInputNumber,
+} from "./getFilteringValue.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -46,34 +48,29 @@ renderMemberList(memberList);
 
 // 검색 버튼을 누르면 필터링된 리스트 렌더링
 const handleSearch = document.querySelector(".search_btn");
-
 handleSearch.addEventListener("click", (event) => {
-  event.preventDefault(); // form 태그 기본 속성 방지
+  event.preventDefault();
 
-  const selectedGender = getSelectValue("sel_gender");
-  const selectedRole = getSelectValue("sel_role");
-  const inputName = getInputName();
-  const inputEnName = getInputValue("enNameInput");
-  const inputGithub = getInputValue("githubInput");
-  const inputWeek1 = getInputNumber("week1Input");
-  const inputWeek2 = getInputNumber("week2Input");
+  const filters = {
+    gender: getSelectValue("sel_gender"),
+    role: getSelectValue("sel_role"),
+    name: getInputName(),
+    enName: getInputValue("enNameInput"),
+    github: getInputValue("githubInput"),
+    week1: getInputNumber("week1Input"),
+    week2: getInputNumber("week2Input"),
+  };
 
-  // 필터링
-  const filteredGender = filterGenderOrRole(
-    memberList,
-    "gender",
-    selectedGender
+  // 공백, 대소문자 구분 없이 필터링
+  const filteredMembers = memberList.filter((member) =>
+    Object.entries(filters).every(([key, value]) => {
+      const trimmedValue = value.trim().toLowerCase();
+      return (
+        trimmedValue === "" ||
+        member[key]?.toString().toLowerCase().includes(trimmedValue)
+      );
+    })
   );
-  const filteredRole = filterGenderOrRole(filteredGender, "role", selectedRole);
-  const filteredName = filterName(filteredRole, inputName);
-  const filteredEnName = filterEnNameOrGit(filteredName, "enName", inputEnName);
-  const filteredGithub = filterEnNameOrGit(
-    filteredEnName,
-    "github",
-    inputGithub
-  );
-  const filteredWeek1 = filterWeek(filteredGithub, "week1", inputWeek1);
-  const filteredMembers = filterWeek(filteredWeek1, "week2", inputWeek2);
 
-  renderMemberList(filteredMembers); // 필터링된 리스트 렌더링
+  renderMemberList(filteredMembers);
 });
