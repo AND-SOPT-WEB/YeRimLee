@@ -6,7 +6,7 @@ export const filterName = (memberList, name) => {
 
   // 입력된 값이 멤버이름에 포함되는지 확인
   const filteredList = memberList.filter((member) =>
-    member.name.includes(name)
+    member.name.includes(name.trim())
   );
 
   return filteredList.length > 0 ? filteredList : null;
