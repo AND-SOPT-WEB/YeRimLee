@@ -1,6 +1,5 @@
 import { members } from "../data.js";
-import { filterGender, getSelectedGender } from "./genderFilter.js";
-import { filterRole, getSelectedRole } from "./roleFilter.js";
+import { filterGenderOrRole, getSelectValue } from "./genderOrRoleFilter.js";
 import { filterName, getInputName } from "./nameFilter.js";
 import { filterEnNameOrGit, getInputValue } from "./enNameOrGitFilter.js";
 import { filterWeek, getInputNumber } from "./weekFilter.js";
@@ -51,8 +50,8 @@ const handleSearch = document.querySelector(".search_btn");
 handleSearch.addEventListener("click", (event) => {
   event.preventDefault(); // form 태그 기본 속성 방지
 
-  const selectedGender = getSelectedGender();
-  const selectedRole = getSelectedRole();
+  const selectedGender = getSelectValue("sel_gender");
+  const selectedRole = getSelectValue("sel_role");
   const inputName = getInputName();
   const inputEnName = getInputValue("enNameInput");
   const inputGithub = getInputValue("githubInput");
@@ -60,8 +59,12 @@ handleSearch.addEventListener("click", (event) => {
   const inputWeek2 = getInputNumber("week2Input");
 
   // 필터링
-  const filteredGender = filterGender(memberList, selectedGender);
-  const filteredRole = filterRole(filteredGender, selectedRole);
+  const filteredGender = filterGenderOrRole(
+    memberList,
+    "gender",
+    selectedGender
+  );
+  const filteredRole = filterGenderOrRole(filteredGender, "role", selectedRole);
   const filteredName = filterName(filteredRole, inputName);
   const filteredEnName = filterEnNameOrGit(filteredName, "enName", inputEnName);
   const filteredGithub = filterEnNameOrGit(
