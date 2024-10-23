@@ -2,8 +2,7 @@ import { members } from "../data.js";
 import { filterGender, getSelectedGender } from "./genderFilter.js";
 import { filterRole, getSelectedRole } from "./roleFilter.js";
 import { filterName, getInputName } from "./nameFilter.js";
-import { filterEnName, getInputEnName } from "./enNameFilter.js";
-import { filterGithub, getInputGithub } from "./githubFilter.js";
+import { filterEnNameOrGit, getInputValue } from "./enNameOrGitFilter.js";
 import { filterWeek, getInputNumber } from "./weekFilter.js";
 
 // 멤버 로컬스토리지에 저장
@@ -55,8 +54,8 @@ handleSearch.addEventListener("click", (event) => {
   const selectedGender = getSelectedGender();
   const selectedRole = getSelectedRole();
   const inputName = getInputName();
-  const inputEnName = getInputEnName();
-  const inputGithub = getInputGithub();
+  const inputEnName = getInputValue("enNameInput");
+  const inputGithub = getInputValue("githubInput");
   const inputWeek1 = getInputNumber("week1Input");
   const inputWeek2 = getInputNumber("week2Input");
 
@@ -64,13 +63,13 @@ handleSearch.addEventListener("click", (event) => {
   const filteredGender = filterGender(memberList, selectedGender);
   const filteredRole = filterRole(filteredGender, selectedRole);
   const filteredName = filterName(filteredRole, inputName);
-  const filteredEnName = filterEnName(filteredName, inputEnName);
-  const filteredGithub = filterGithub(filteredEnName, inputGithub);
-
-  // Week1 필터링
+  const filteredEnName = filterEnNameOrGit(filteredName, "enName", inputEnName);
+  const filteredGithub = filterEnNameOrGit(
+    filteredEnName,
+    "github",
+    inputGithub
+  );
   const filteredWeek1 = filterWeek(filteredGithub, "week1", inputWeek1);
-
-  // Week2 필터링
   const filteredMembers = filterWeek(filteredWeek1, "week2", inputWeek2);
 
   renderMemberList(filteredMembers); // 필터링된 리스트 렌더링
