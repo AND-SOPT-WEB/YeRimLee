@@ -1,6 +1,7 @@
 import { members } from "../data.js";
 import { getFilteringValue } from "./getFilteringValue.js";
 import { filterMembers } from "./filter.js";
+import { selectAllCheckBox } from "./selectAll.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -25,7 +26,7 @@ function renderMemberList(filteredMembers) {
   let showMemberList = filteredMembers.map((member) => {
     return `
         <tr id=${member.id}>
-        <td><input type="checkbox"></td>
+        <td><input type="checkbox" name="webbyList"></td>
         <td>${member.name}</td>
         <td>${member.enName}</td>
         <td>${member.github}</td>
@@ -41,6 +42,8 @@ function renderMemberList(filteredMembers) {
 
 // 전체 멤버 리스트 렌더링
 renderMemberList(memberList);
+// 전체 체크박스 기능 활성화
+selectAllCheckBox();
 
 // 검색 버튼을 누르면 필터링된 리스트 렌더링
 const handleSearch = document.querySelector(".search_btn");
