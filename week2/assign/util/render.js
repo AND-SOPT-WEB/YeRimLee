@@ -1,6 +1,5 @@
 import { members } from "../data.js";
-import { getFilteringValue } from "./getFilteringValue.js";
-import { filterMembers } from "./filter.js";
+import { filterMembers, getFilteringValue } from "./filter.js";
 import { selectAllCheckBox } from "./selectAll.js";
 
 // 멤버 로컬스토리지에 저장
