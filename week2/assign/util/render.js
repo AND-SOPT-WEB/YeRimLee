@@ -2,6 +2,7 @@ import { members } from "../data.js";
 import { filterMembers, getFilteringValue } from "./filter.js";
 import { selectAllCheckBox } from "./selectAll.js";
 import { deleteSelectedMembers } from "./deleteList.js";
+import { redirectGitHandler } from "./redirectGit.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -30,7 +31,7 @@ const renderMemberList = (filteredMembers) => {
         <td><input type="checkbox" name="webbyList" class="webby_checkbox"></td>
         <td>${member.name}</td>
         <td>${member.enName}</td>
-        <td>${member.github}</td>
+        <td><span class="git_link" data_url="https://github.com/${member.github}">${member.github}</span></td>
         <td>${member.gender}</td>
         <td>${member.role}</td>
         <td>${member.week1}</td>
@@ -40,10 +41,12 @@ const renderMemberList = (filteredMembers) => {
   });
   showMemberContainer.innerHTML += showMemberList.join("");
 
-  // 체크박스기능
+  // 전체 체크박스
   selectAllCheckBox();
   // 멤버 삭제 기능 호출 시 렌더링 콜백 전달
   deleteSelectedMembers(memberList, renderMemberList);
+  // Git 이동
+  redirectGitHandler();
 };
 
 // 초기 멤버 리스트 렌더링
