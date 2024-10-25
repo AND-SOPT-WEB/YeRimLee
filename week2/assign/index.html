@@ -91,8 +91,11 @@
     <!-- 모달 -->
     <section>
       <dialog class="modal">
-        <h2>새 멤버 추가</h2>
         <form>
+          <section class="modal_header">
+            <h2>새 멤버 추가</h2>
+            <button>x</button>
+          </section>
           <label for="name">이름</label>
           <input type="text" placeholder="이름을 입력해주세요" />
 
@@ -122,7 +125,7 @@
           <label for="week2">2주차 금잔디조</label>
           <input type="text" placeholder="2주차 조 이름을 입력해주세요" />
 
-          <button type="submit">추가</button>
+          <button class="modal_add_btn" type="submit">추가</button>
         </form>
       </dialog>
     </section>

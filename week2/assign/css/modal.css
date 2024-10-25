@@ -7,6 +7,12 @@
   background-color: #f6f5f2;
 }
 
+.modal_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .modal input,
 .modal select {
   width: 100%;
@@ -21,7 +27,7 @@
   outline: none;
 }
 
-.modal button {
+.modal_add_btn {
   margin: 1rem 0 0 0;
   width: 100%;
   height: 2rem;
