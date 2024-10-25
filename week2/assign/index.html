@@ -97,34 +97,49 @@
             <button>x</button>
           </section>
           <label for="name">이름</label>
-          <input type="text" placeholder="이름을 입력해주세요" />
+          <input type="text" name="name" placeholder="이름을 입력해주세요" />
 
           <label for="en-name">영문이름</label>
-          <input type="text" placeholder="영문 이름을 입력해주세요" />
+          <input
+            type="text"
+            name="enName"
+            placeholder="영문 이름을 입력해주세요"
+          />
 
           <label for="github">Github</label>
-          <input type="text" placeholder="Github 아이디를 입력해주세요" />
+          <input
+            type="text"
+            name="github"
+            placeholder="Github 아이디를 입력해주세요"
+          />
 
           <label for="gender">성별</label>
-          <select>
+          <select name="gender">
             <option value="" selected>성별 선택</option>
             <option value="male">남자</option>
             <option value="female">여자</option>
           </select>
 
           <label for="role">역할</label>
-          <select>
+          <select name="role">
             <option value="" selected>OB / YB 선택</option>
             <option value="ob">OB</option>
             <option value="yb">YB</option>
           </select>
 
           <label for="week1">1주차 금잔디조</label>
-          <input type="text" placeholder="1주차 조 이름을 입력해주세요" />
+          <input
+            type="text"
+            name="week1"
+            placeholder="1주차 조 이름을 입력해주세요"
+          />
 
           <label for="week2">2주차 금잔디조</label>
-          <input type="text" placeholder="2주차 조 이름을 입력해주세요" />
-
+          <input
+            type="text"
+            name="week2"
+            placeholder="2주차 조 이름을 입력해주세요"
+          />
           <button class="modal_add_btn" type="submit">추가</button>
         </form>
       </dialog>

@@ -4,6 +4,7 @@ import { selectAllCheckBox } from "./selectAll.js";
 import { deleteSelectedMembers } from "./deleteList.js";
 import { redirectGitHandler } from "./redirectGit.js";
 import { openModal } from "./openModal.js";
+import { addMember } from "./addMember.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -16,7 +17,7 @@ if (!localStorage.getItem("MEMBER_KEY")) {
 let memberList = JSON.parse(localStorage.getItem("MEMBER_KEY")) || [];
 
 // 필터링된 멤버 리스트를 렌더링하는 함수
-const renderMemberList = (filteredMembers) => {
+export const renderMemberList = (filteredMembers) => {
   const showMemberContainer = document.querySelector(".tbody");
   showMemberContainer.innerHTML = ""; // 기존 리스트 초기화
 
@@ -53,7 +54,7 @@ const renderMemberList = (filteredMembers) => {
 // 초기 멤버 리스트 렌더링
 renderMemberList(memberList);
 // 모달
-openModal();
+openModal(addMember);
 
 // 검색 버튼을 누르면 필터링된 리스트 렌더링
 const handleSearch = document.querySelector(".search_btn");
