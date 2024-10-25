@@ -88,6 +88,44 @@
         <tbody class="tbody"></tbody>
       </table>
     </main>
+    <!-- 모달 -->
+    <section>
+      <dialog class="modal">
+        <h2>새 멤버 추가</h2>
+        <form>
+          <label for="name">이름</label>
+          <input type="text" placeholder="이름을 입력해주세요" />
+
+          <label for="en-name">영문이름</label>
+          <input type="text" placeholder="영문 이름을 입력해주세요" />
+
+          <label for="github">Github</label>
+          <input type="text" placeholder="Github 아이디를 입력해주세요" />
+
+          <label for="gender">성별</label>
+          <select>
+            <option value="" selected>성별 선택</option>
+            <option value="male">남자</option>
+            <option value="female">여자</option>
+          </select>
+
+          <label for="role">역할</label>
+          <select>
+            <option value="" selected>OB / YB 선택</option>
+            <option value="ob">OB</option>
+            <option value="yb">YB</option>
+          </select>
+
+          <label for="week1">1주차 금잔디조</label>
+          <input type="text" placeholder="1주차 조 이름을 입력해주세요" />
+
+          <label for="week2">2주차 금잔디조</label>
+          <input type="text" placeholder="2주차 조 이름을 입력해주세요" />
+
+          <button type="submit">추가</button>
+        </form>
+      </dialog>
+    </section>
   </body>
   <script type="module" src="./util/render.js"></script>
   <script type="module" src="./util/resetFilter.js"></script>
