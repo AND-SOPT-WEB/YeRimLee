@@ -3,6 +3,7 @@ import { filterMembers, getFilteringValue } from "./filter.js";
 import { selectAllCheckBox } from "./selectAll.js";
 import { deleteSelectedMembers } from "./deleteList.js";
 import { redirectGitHandler } from "./redirectGit.js";
+import { openModal } from "./openModal.js";
 
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
@@ -51,6 +52,8 @@ const renderMemberList = (filteredMembers) => {
 
 // 초기 멤버 리스트 렌더링
 renderMemberList(memberList);
+// 모달
+openModal();
 
 // 검색 버튼을 누르면 필터링된 리스트 렌더링
 const handleSearch = document.querySelector(".search_btn");
