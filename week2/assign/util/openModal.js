@@ -12,4 +12,11 @@ export const openModal = () => {
   // 회원 추가시 모든 필드 입력 확인
   const modalAddBtn = document.querySelector(".modal_add_btn");
   modalAddBtn.addEventListener("click", addMember);
+
+  // 모달 외부 클릭 시 모달 닫기
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.close(); 
+    }
+  });
 };

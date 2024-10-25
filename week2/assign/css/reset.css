@@ -134,3 +134,6 @@ select {
   background: none;
   border: none;
 }
+dialog {
+  padding: 0;
+}
