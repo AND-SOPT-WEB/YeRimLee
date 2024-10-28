@@ -1,8 +1,8 @@
 /* 헤더 */
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  justify-content: space-between;
 
   position: fixed;
   top: 0;
@@ -13,6 +13,19 @@
   background-color: #ffc6c6;
 
   z-index: 1;
+}
+
+header > i {
+  justify-self: start;
+}
+
+h1 {
+  justify-self: center;
+  white-space: nowrap;
+}
+
+header > p {
+  justify-self: end;
 }
 
 main {
