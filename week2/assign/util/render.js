@@ -6,6 +6,7 @@ import { redirectGitHandler } from "./redirectGit.js";
 import { openModal } from "./openModal.js";
 import { addMember } from "./addMember.js";
 
+// 회원 렌더링 관장
 // 멤버 로컬스토리지에 저장
 const MEMBER_KEY = "membersData";
 

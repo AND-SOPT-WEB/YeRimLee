@@ -1,5 +1,6 @@
 import { addMember } from "./addMember.js";
 
+// 모달 열고 닫기
 export const openModal = () => {
   // 모달 열기
   const addBtn = document.querySelector(".add_btn");
