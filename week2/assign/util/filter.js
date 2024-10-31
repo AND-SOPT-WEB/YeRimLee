@@ -2,7 +2,7 @@
 export const filterMembers = (memberList, filters) => {
   return memberList.filter((member) =>
     Object.entries(filters).every(([key, value]) => {
-      const trimmedValue = value.trim().toLowerCase();
+      const trimmedValue = value.trim().toString().toLowerCase();
       if (key === "gender") {
         return (
           trimmedValue === "" || member[key]?.toLowerCase() === trimmedValue
