@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <script
+      src="https://kit.fontawesome.com/e126ff8299.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>예사모 관리자 페이지</title>
+  </head>
+
+  <body>
+    <!-- 헤더영역 -->
+    <header class="header">
+      <i class="fa-solid fa-bars"></i>
+      <h1>회원 관리 페이지</h1>
+      <p>🥇예사모 1등 회원 유태승</p>
+    </header>
+
+    <main>
+      <!-- 필터 -->
+      <form class="filter_section">
+        <div class="name">
+          <label for="name">이름</label>
+          <input id="nameInput" type="text" />
+        </div>
+        <div class="en_name">
+          <label for="en-name">영문이름</label>
+          <input id="enNameInput" type="text" />
+        </div>
+        <div class="github">
+          <label for="github">Github</label>
+          <input id="githubInput" type="text" />
+        </div>
+        <div class="gender">
+          <label for="gender">성별</label>
+          <select id="selGender" >
+            <option value="" selected>성별 선택</option>
+            <option value="male">남자</option>
+            <option value="female">여자</option>
+          </select>
+        </div>
+        <div class="role">
+          <label for="role">역할</label>
+          <select id="selRole">
+            <option value="" selected>OB / YB 선택</option>
+            <option value="ob">OB</option>
+            <option value="yb">YB</option>
+          </select>
+        </div>
+        <div class="week1">
+          <label for="week1">1주차 금잔디조</label>
+          <input id="week1Input" type="text" />
+        </div>
+        <div class="week2">
+          <label for="week2">2주차 금잔디조</label>
+          <input id="week2Input" type="text" />
+        </div>
+        <!-- 필터 버튼 -->
+        <button class="reset_btn">초기화</button>
+        <button class="search_btn">검색</button>
+      </form>
+
+      <!-- 리스트 버튼 -->
+      <section class="list_btn">
+        <button class="delete_btn">선택삭제</button>
+        <button class="add_btn">추가</button>
+      </section>
+
+      <!-- 테이블 리스트 -->
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" name="webby" /></th>
+            <th>이름</th>
+            <th>영문이름</th>
+            <th>Github</th>
+            <th>성별</th>
+            <th>역할</th>
+            <th>1주차 금잔디</th>
+            <th>2주차 금잔디</th>
+          </tr>
+        </thead>
+        <tbody class="tbody"></tbody>
+      </table>
+    </main>
+    <!-- 모달 -->
+    <section>
+      <dialog class="modal">
+        <form>
+          <section class="modal_header">
+            <h2>새 멤버 추가</h2>
+            <button>x</button>
+          </section>
+          <label for="name">이름</label>
+          <input type="text" name="name" placeholder="이름을 입력해주세요" />
+
+          <label for="en-name">영문이름</label>
+          <input
+            type="text"
+            name="enName"
+            placeholder="영문 이름을 입력해주세요"
+          />
+
+          <label for="github">Github</label>
+          <input
+            type="text"
+            name="github"
+            placeholder="Github 아이디를 입력해주세요"
+          />
+
+          <label for="gender">성별</label>
+          <select name="gender">
+            <option value="" selected>성별 선택</option>
+            <option value="male">남자</option>
+            <option value="female">여자</option>
+          </select>
+
+          <label for="role">역할</label>
+          <select name="role">
+            <option value="" selected>OB / YB 선택</option>
+            <option value="ob">OB</option>
+            <option value="yb">YB</option>
+          </select>
+
+          <label for="week1">1주차 금잔디조</label>
+          <input
+            type="text"
+            name="week1"
+            placeholder="1주차 조 이름을 입력해주세요"
+          />
+
+          <label for="week2">2주차 금잔디조</label>
+          <input
+            type="text"
+            name="week2"
+            placeholder="2주차 조 이름을 입력해주세요"
+          />
+          <button class="modal_add_btn" type="submit">추가</button>
+        </form>
+      </dialog>
+    </section>
+  </body>
+  <script type="module" src="./util/render.js"></script>
+  <script type="module" src="./util/resetFilter.js"></script>
+</html>
