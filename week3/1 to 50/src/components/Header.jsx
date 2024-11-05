@@ -1,22 +1,14 @@
+/* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function Header() {
+export default function Header({ timer }) {
+  // 추후 level 반영
   const [level, setLevel] = useState(0);
-  const [timer, setTimer] = useState(0);
 
   const handleLevelChange = (event) => {
     setLevel(event.target.value);
   };
-
-  // 일단은 타이머가 1초마다 증가하도록 설정
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimer((prev) => prev + 1);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <GameHeader>
@@ -32,7 +24,7 @@ export default function Header() {
           <option value={2}>레벨 2</option>
           <option value={3}>레벨 3</option>
         </Select>
-        <TimerDisplay>{timer}</TimerDisplay>
+        <TimerDisplay>{timer.toFixed(2)}s</TimerDisplay>
       </LevelSelectContainer>
     </GameHeader>
   );
