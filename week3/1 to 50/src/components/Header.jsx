@@ -26,13 +26,13 @@ const Header = ({
   // 랭킹보드 출력
   const handleRankActive = () => {
     setRankActive((prev) => !prev);
-    setIsGameStarted((prev) => !prev);
+    setIsGameStarted(false);
   };
 
   // 게임 출력
   const handleGameStart = () => {
     setIsGameStarted((prev) => !prev);
-    setRankActive((prev) => !prev);
+    setRankActive(false);
   };
 
   return (
