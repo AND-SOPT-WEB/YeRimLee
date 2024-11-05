@@ -2,15 +2,25 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 
-export default function Header({ timer, setIsGameStarted }) {
+const Header = ({
+  timer,
+  setIsGameStarted,
+  setRankActive,
+  isRankActive,
+  setTimer,
+}) => {
   // 추후 level 반영
   const [level, setLevel] = useState(0);
-  // 랭킹 보드 클릭 헤더 우측 렌더링x
-  const [isRankActive, setRankActive] = useState(false);
 
-  // 추후 level 반영
+  // 레벨 변경 핸들러
   const handleLevelChange = (event) => {
     setLevel(event.target.value);
+    setIsGameStarted(false); // 게임을 종료
+    setTimer(0); // 타이머 초기화
+
+    setTimeout(() => {
+      setIsGameStarted(true); // 게임 시작
+    }, 500); // 500ms 후에 실행
   };
 
   // 랭킹보드 출력
@@ -20,7 +30,7 @@ export default function Header({ timer, setIsGameStarted }) {
 
   // 게임 출력
   const handleGameStart = () => {
-    setIsGameStarted(true);
+    setIsGameStarted((prev) => !prev);
   };
 
   return (
@@ -45,7 +55,9 @@ export default function Header({ timer, setIsGameStarted }) {
       )}
     </GameHeader>
   );
-}
+};
+
+export default Header;
 
 const GameHeader = styled.header`
   display: flex;
