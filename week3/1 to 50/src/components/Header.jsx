@@ -5,33 +5,44 @@ import { useState } from "react";
 export default function Header({ timer, setIsGameStarted }) {
   // 추후 level 반영
   const [level, setLevel] = useState(0);
+  // 랭킹 보드 클릭 헤더 우측 렌더링x
+  const [isRankActive, setRankActive] = useState(false);
 
+  // 추후 level 반영
   const handleLevelChange = (event) => {
     setLevel(event.target.value);
+  };
+
+  // 랭킹보드 출력
+  const handleRankActive = () => {
+    setRankActive((prev) => !prev);
   };
 
   // 게임 출력
   const handleGameStart = () => {
     setIsGameStarted(true);
-    console.log("클릭");
   };
 
   return (
     <GameHeader>
-      <Title>1 to 50</Title>
-      <ButtonGroup>
-        <Button onClick={handleGameStart}>게임</Button>
-        <Button>랭킹</Button>
-      </ButtonGroup>
-      <LevelSelectContainer>
-        <Select value={level} onChange={handleLevelChange}>
-          <option value={0}>레벨 선택</option>
-          <option value={1}>레벨 1</option>
-          <option value={2}>레벨 2</option>
-          <option value={3}>레벨 3</option>
-        </Select>
-        <TimerDisplay>{timer.toFixed(2)}s</TimerDisplay>
-      </LevelSelectContainer>
+      <HeaderLeft>
+        <Title>1 to 50</Title>
+        <ButtonGroup>
+          <Button onClick={handleGameStart}>게임</Button>
+          <Button onClick={handleRankActive}>랭킹</Button>
+        </ButtonGroup>
+      </HeaderLeft>
+      {isRankActive === false && (
+        <LevelSelectContainer>
+          <Select value={level} onChange={handleLevelChange}>
+            <option value={0}>레벨 선택</option>
+            <option value={1}>레벨 1</option>
+            <option value={2}>레벨 2</option>
+            <option value={3}>레벨 3</option>
+          </Select>
+          <TimerDisplay>{timer.toFixed(2)}s</TimerDisplay>
+        </LevelSelectContainer>
+      )}
     </GameHeader>
   );
 }
@@ -42,6 +53,11 @@ const GameHeader = styled.header`
   justify-content: space-between;
   padding: 1rem;
   background-color: ${(props) => props.theme.colors.header};
+`;
+
+const HeaderLeft = styled.div`
+  display: flex;
+  gap: 2rem;
 `;
 
 const Title = styled.h1`
@@ -55,7 +71,7 @@ const ButtonGroup = styled.div`
 `;
 
 const Button = styled.button`
-  padding: 10px 20px;
+  padding: 1rem;
   background-color: ${(props) => props.theme.colors.header};
   color: ${(props) => props.theme.colors.text};
   border: none;
