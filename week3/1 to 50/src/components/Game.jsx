@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
 
-const Game = ({ setTimer }) => {
+const Game = ({ setTimer, setIsGameStarted }) => {
   const [numbers, setNumbers] = useState([]);
   const [nextNumber, setNextNumber] = useState(1);
   const [timerValue, setTimerValue] = useState(0);
@@ -74,7 +74,18 @@ const Game = ({ setTimer }) => {
   useEffect(() => {
     if (nextNumber > 18) {
       setIsRunning(false);
-      alert(`Game Over! Time: ${timerValue} seconds`);
+      // 게임 종료 시 정보 저장
+      const endTime = new Date().toLocaleString(); // 현재 시각
+      const level = 1;
+      const playTime = timerValue; // 플레이 시간
+      const gameInfo = {
+        endTime,
+        level,
+        playTime,
+      };
+      localStorage.setItem("gameResult", JSON.stringify(gameInfo));
+      alert(`Game Over! Time: ${playTime} seconds`);
+      setIsGameStarted(true);
     }
   }, [nextNumber, timerValue]);
 
