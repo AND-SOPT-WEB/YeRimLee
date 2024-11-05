@@ -83,12 +83,21 @@ const Game = ({ setTimer, setIsGameStarted }) => {
         level,
         playTime,
       };
-      localStorage.setItem("gameResult", JSON.stringify(gameInfo));
+
+      // 기존의 게임 기록을 가져옴
+      const existingGameRecords =
+        JSON.parse(localStorage.getItem("gameResults")) || [];
+
+      // 새로운 게임 결과를 배열에 추가
+      existingGameRecords.push(gameInfo);
+
+      // 업데이트된 게임 기록을 localStorage에 저장
+      localStorage.setItem("gameResults", JSON.stringify(existingGameRecords));
+
       alert(`Game Over! Time: ${playTime} seconds`);
       setIsGameStarted(true);
     }
   }, [nextNumber, timerValue]);
-
   useEffect(() => {
     initializeNumbers();
   }, [initializeNumbers]);
