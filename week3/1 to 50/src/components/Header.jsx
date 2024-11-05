@@ -2,7 +2,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 
-export default function Header({ timer }) {
+export default function Header({ timer, setIsGameStarted }) {
   // 추후 level 반영
   const [level, setLevel] = useState(0);
 
@@ -10,11 +10,17 @@ export default function Header({ timer }) {
     setLevel(event.target.value);
   };
 
+  // 게임 출력
+  const handleGameStart = () => {
+    setIsGameStarted(true);
+    console.log("클릭");
+  };
+
   return (
     <GameHeader>
       <Title>1 to 50</Title>
       <ButtonGroup>
-        <Button>게임</Button>
+        <Button onClick={handleGameStart}>게임</Button>
         <Button>랭킹</Button>
       </ButtonGroup>
       <LevelSelectContainer>

@@ -6,11 +6,12 @@ import { useState } from "react";
 
 function App() {
   const [timer, setTimer] = useState(0);
+  const [isGameStated, setIsGameStarted] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
-      <Header timer={timer} />
-      <Game setTimer={setTimer} />
+      <Header timer={timer} setIsGameStarted={setIsGameStarted} />
+      {isGameStated === true && <Game setTimer={setTimer} />}
     </ThemeProvider>
   );
 }
