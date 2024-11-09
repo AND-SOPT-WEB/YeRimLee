@@ -23,7 +23,7 @@ function App() {
         currentView={currentView}
         setTimer={setTimer}
       />
-      {currentView === "게임" && <Game setTimer={setTimer} />}
+      {currentView === "게임" && <Game timer={timer} setTimer={setTimer} />}
       {currentView === "랭킹" && <LankBoard />}
     </ThemeProvider>
   );

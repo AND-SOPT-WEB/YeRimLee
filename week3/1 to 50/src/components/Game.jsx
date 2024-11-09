@@ -3,10 +3,9 @@
 import { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
 
-const Game = ({ setTimer, setIsGameStarted }) => {
+const Game = ({ timer, setTimer, setIsGameStarted }) => {
   const [numbers, setNumbers] = useState([]);
   const [nextNumber, setNextNumber] = useState(1);
-  const [timerValue, setTimerValue] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [remainingNumbers, setRemainingNumbers] = useState([]);
 
@@ -62,14 +61,14 @@ const Game = ({ setTimer, setIsGameStarted }) => {
     let interval;
     if (isRunning) {
       interval = setInterval(() => {
-        setTimerValue((prev) => parseFloat((prev + 0.01).toFixed(2)));
+        setTimer((prev) => parseFloat((prev + 0.01).toFixed(2)));
         setTimer((prev) => prev + 0.01); // Update timer in App
       }, 10);
-    } else if (!isRunning && timerValue !== 0) {
+    } else if (!isRunning && timer !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isRunning, setTimer]);
+  }, [isRunning]);
   // 초기화
   useEffect(() => {
     if (nextNumber > 18) {
@@ -77,7 +76,7 @@ const Game = ({ setTimer, setIsGameStarted }) => {
       // 게임 종료 시 정보 저장
       const endTime = new Date().toLocaleString(); // 현재 시각
       const level = 1;
-      const playTime = timerValue; // 플레이 시간
+      const playTime = timer; // 플레이 시간
       const gameInfo = {
         endTime,
         level,
@@ -97,7 +96,7 @@ const Game = ({ setTimer, setIsGameStarted }) => {
       alert(`Game Over! Time: ${playTime} seconds`);
       setIsGameStarted(true);
     }
-  }, [nextNumber, timerValue]);
+  }, [nextNumber, timer]);
   useEffect(() => {
     initializeNumbers();
   }, [initializeNumbers]);
