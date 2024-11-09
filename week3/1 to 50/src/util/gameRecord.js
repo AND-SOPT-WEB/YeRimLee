@@ -1,7 +1,6 @@
-export const saveGameRecord = (playTime) => {
+export const saveGameRecord = (level, playTime) => {
   // 게임 종료 시 정보 저장
   const endTime = new Date().toLocaleString(); // 현재 시각
-  const level = 1;
   const gameInfo = {
     endTime,
     level,
