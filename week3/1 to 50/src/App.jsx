@@ -19,10 +19,10 @@ function App() {
         isRankActive={isRankActive}
         setTimer={setTimer}
       />
-      {isGameStated === true && (
+      {isGameStated && (
         <Game setTimer={setTimer} setIsGameStarted={setIsGameStarted} />
       )}
-      {isRankActive === true && <LankBoard />}
+      {isRankActive && <LankBoard />}
     </ThemeProvider>
   );
 }

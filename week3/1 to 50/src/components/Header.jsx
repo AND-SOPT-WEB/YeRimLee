@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
-import { useState } from "react";
 
 const Header = ({
   timer,
@@ -10,11 +9,9 @@ const Header = ({
   setTimer,
 }) => {
   // 추후 level 반영
-  const [level, setLevel] = useState(0);
 
   // 레벨 변경 핸들러
-  const handleLevelChange = (event) => {
-    setLevel(event.target.value);
+  const handleLevelChange = () => {
     setIsGameStarted(false); // 게임을 종료
     setTimer(0); // 타이머 초기화
 
@@ -46,8 +43,7 @@ const Header = ({
       </HeaderLeft>
       {isRankActive === false && (
         <LevelSelectContainer>
-          <Select value={level} onChange={handleLevelChange}>
-            <option value={0}>레벨 선택</option>
+          <Select onChange={handleLevelChange}>
             <option value={1}>레벨 1</option>
             <option value={2}>레벨 2</option>
             <option value={3}>레벨 3</option>
