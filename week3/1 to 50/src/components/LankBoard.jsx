@@ -33,7 +33,7 @@ const LankBoard = () => {
         <tbody>
           {sortedData.length > 0 ? (
             sortedData.map((record, index) => (
-              <tr key={index}>
+              <tr key={`${record.endTime}-${index}`}>
                 <td>{record.endTime}</td>
                 <td>{record.level}</td>
                 <td>{record.playTime}</td>
