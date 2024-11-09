@@ -1,35 +1,14 @@
 /* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 
-const Header = ({
-  timer,
-  setIsGameStarted,
-  setRankActive,
-  isRankActive,
-  setTimer,
-}) => {
+const Header = ({ timer, handleView, currentView, setTimer }) => {
   // 추후 level 반영
 
   // 레벨 변경 핸들러
   const handleLevelChange = () => {
-    setIsGameStarted(false); // 게임을 종료
     setTimer(0); // 타이머 초기화
 
-    setTimeout(() => {
-      setIsGameStarted(true); // 게임 시작
-    }, 500); // 500ms 후에 실행
-  };
-
-  // 랭킹보드 출력
-  const handleRankActive = () => {
-    setRankActive((prev) => !prev);
-    setIsGameStarted(false);
-  };
-
-  // 게임 출력
-  const handleGameStart = () => {
-    setIsGameStarted((prev) => !prev);
-    setRankActive(false);
+    setTimeout(() => {}, 500); // 500ms 후에 실행
   };
 
   return (
@@ -37,13 +16,13 @@ const Header = ({
       <HeaderLeft>
         <Title>1 to 50</Title>
         <ButtonGroup>
-          <Button onClick={handleGameStart}>게임</Button>
-          <Button onClick={handleRankActive}>랭킹</Button>
+          <Button onClick={handleView}>게임</Button>
+          <Button onClick={handleView}>랭킹</Button>
         </ButtonGroup>
       </HeaderLeft>
-      {isRankActive === false && (
+      {currentView === "게임" && (
         <LevelSelectContainer>
-          <Select onChange={handleLevelChange}>
+          <Select onClick={handleLevelChange}>
             <option value={1}>레벨 1</option>
             <option value={2}>레벨 2</option>
             <option value={3}>레벨 3</option>

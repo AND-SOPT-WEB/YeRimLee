@@ -7,22 +7,24 @@ import { useState } from "react";
 
 function App() {
   const [timer, setTimer] = useState(0);
-  const [isGameStated, setIsGameStarted] = useState(false);
-  const [isRankActive, setRankActive] = useState(false);
+  const [currentView, setCurrentView] = useState("게임");
+
+  // 렌더링 컨텐츠
+  const handleView = (event) => {
+    const viewName = event.target.textContent;
+    setCurrentView(viewName);
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <Header
         timer={timer}
-        setIsGameStarted={setIsGameStarted}
-        setRankActive={setRankActive}
-        isRankActive={isRankActive}
+        handleView={handleView}
+        currentView={currentView}
         setTimer={setTimer}
       />
-      {isGameStated && (
-        <Game setTimer={setTimer} setIsGameStarted={setIsGameStarted} />
-      )}
-      {isRankActive && <LankBoard />}
+      {currentView === "게임" && <Game setTimer={setTimer} />}
+      {currentView === "랭킹" && <LankBoard />}
     </ThemeProvider>
   );
 }
