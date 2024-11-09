@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
+import { saveGameRecord } from "../util/gameRecord";
 
 const Game = ({ timer, setTimer, setIsGameStarted }) => {
   const [numbers, setNumbers] = useState([]);
@@ -69,34 +70,18 @@ const Game = ({ timer, setTimer, setIsGameStarted }) => {
     }
     return () => clearInterval(interval);
   }, [isRunning]);
+
   // 초기화
   useEffect(() => {
     if (nextNumber > 18) {
       setIsRunning(false);
-      // 게임 종료 시 정보 저장
-      const endTime = new Date().toLocaleString(); // 현재 시각
-      const level = 1;
-      const playTime = timer; // 플레이 시간
-      const gameInfo = {
-        endTime,
-        level,
-        playTime,
-      };
+      saveGameRecord(1, timer);
 
-      // 기존의 게임 기록을 가져옴
-      const existingGameRecords =
-        JSON.parse(localStorage.getItem("gameResults")) || [];
-
-      // 새로운 게임 결과를 배열에 추가
-      existingGameRecords.push(gameInfo);
-
-      // 업데이트된 게임 기록을 localStorage에 저장
-      localStorage.setItem("gameResults", JSON.stringify(existingGameRecords));
-
-      alert(`Game Over! Time: ${playTime} seconds`);
+      alert(`Game Over! Time: ${timer} seconds`);
       setIsGameStarted(true);
     }
   }, [nextNumber, timer]);
+
   useEffect(() => {
     initializeNumbers();
   }, [initializeNumbers]);
