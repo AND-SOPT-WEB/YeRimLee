@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
 import { saveGameRecord } from "../util/gameRecord";
 
-const Game = ({ timer, setTimer, setIsGameStarted }) => {
+const Game = ({ timer, setTimer }) => {
   const [numbers, setNumbers] = useState([]);
   const [nextNumber, setNextNumber] = useState(1);
   const [isRunning, setIsRunning] = useState(false);
@@ -63,7 +63,6 @@ const Game = ({ timer, setTimer, setIsGameStarted }) => {
     if (isRunning) {
       interval = setInterval(() => {
         setTimer((prev) => parseFloat((prev + 0.01).toFixed(2)));
-        setTimer((prev) => prev + 0.01); // Update timer in App
       }, 10);
     } else if (!isRunning && timer !== 0) {
       clearInterval(interval);
@@ -74,13 +73,20 @@ const Game = ({ timer, setTimer, setIsGameStarted }) => {
   // 초기화
   useEffect(() => {
     if (nextNumber > 18) {
-      setIsRunning(false);
       saveGameRecord(1, timer);
-
       alert(`Game Over! Time: ${timer} seconds`);
-      setIsGameStarted(true);
+      initializeGame();
     }
   }, [nextNumber, timer]);
+
+  // 게임 초기화 함수
+  const initializeGame = () => {
+    setNextNumber(1);
+    setTimer(0);
+    setIsRunning(false);
+    initializeNumbers();
+  };
+  
 
   useEffect(() => {
     initializeNumbers();
