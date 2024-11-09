@@ -95,8 +95,11 @@ const Game = ({ timer, setTimer }) => {
   return (
     <GameContainer>
       <Board>
-        {numbers.map((num) => (
-          <Card key={num} onClick={() => handleNumberClick(num)}>
+        {numbers.map((num, index) => (
+          <Card
+            key={`card-${num}-${index}`}
+            onClick={() => handleNumberClick(num)}
+          >
             {num}
           </Card>
         ))}
