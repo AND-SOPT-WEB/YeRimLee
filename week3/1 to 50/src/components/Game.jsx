@@ -5,10 +5,15 @@ import styled from "@emotion/styled";
 import { saveGameRecord } from "../util/gameRecord";
 
 const Game = ({ timer, setTimer }) => {
-  const [numbers, setNumbers] = useState([]);
+  const [numbers, setNumbers] = useState(() => {
+    const initialNumbers = Array.from({ length: 9 }, (_, i) => i + 1);
+    return initialNumbers.sort(() => Math.random() - 0.5);
+  });
   const [nextNumber, setNextNumber] = useState(1);
   const [isRunning, setIsRunning] = useState(false);
-  const [remainingNumbers, setRemainingNumbers] = useState([]);
+  const [remainingNumbers, setRemainingNumbers] = useState(
+    Array.from({ length: 9 }, (_, i) => i + 10)
+  );
 
   // 최초 1~9
   const initializeNumbers = useCallback(() => {
@@ -86,11 +91,6 @@ const Game = ({ timer, setTimer }) => {
     setIsRunning(false);
     initializeNumbers();
   };
-  
-
-  useEffect(() => {
-    initializeNumbers();
-  }, [initializeNumbers]);
 
   return (
     <GameContainer>
