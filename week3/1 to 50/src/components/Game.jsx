@@ -40,10 +40,13 @@ const Game = ({ timer, setTimer, level }) => {
       // nextNumber 증가
       setNextNumber((prev) => prev + 1);
 
-      // 현재 숫자를 제거하고 나머지 숫자를 업데이트
+      // 클릭한 숫자의 인덱스를 찾고, 해당 위치에 새로운 숫자를 추가
       setNumbers((prev) => {
-        // 클릭한 숫자 제거
-        const updatedNumbers = prev.filter((n) => n !== num);
+        const indexToReplace = prev.indexOf(num);
+        const updatedNumbers = [...prev];
+
+        // 클릭한 숫자 자리를 빈자리로 만들어서 비어 보이게 함
+        updatedNumbers.splice(indexToReplace, 1, null);
 
         // 10~18에서 무작위로 다음 숫자 선택
         if (remainingNumbers.length > 0) {
@@ -52,14 +55,15 @@ const Game = ({ timer, setTimer, level }) => {
           );
           const nextRandomNumber = remainingNumbers[randomIndex];
 
-          // 선택한 숫자를 제외
+          // 선택한 숫자를 제외한 나머지 숫자 리스트
           const updatedRemainingNumbers = remainingNumbers.filter(
             (n) => n !== nextRandomNumber
           );
 
           setRemainingNumbers(updatedRemainingNumbers);
 
-          return [...updatedNumbers, nextRandomNumber];
+          // 클릭한 숫자의 자리에 새 숫자를 추가
+          updatedNumbers.splice(indexToReplace, 1, nextRandomNumber);
         }
 
         return updatedNumbers;
@@ -75,14 +79,16 @@ const Game = ({ timer, setTimer, level }) => {
     }
   };
 
+  // 타이머
+  useEffect(() => {
+    return () => clearInterval(interval);
+  }, [interval]);
+
   // 게임 초기화 함수
   const initializeGame = () => {
     setNextNumber(1);
     setTimer(0);
     initializeNumbers();
-    if (interval) {
-      clearInterval(interval);
-    }
   };
 
   // 레벨 변경 시 게임 초기화
@@ -98,7 +104,7 @@ const Game = ({ timer, setTimer, level }) => {
         {numbers.map((num, index) => (
           <Card
             key={`card-${num}-${index}`}
-            onClick={() => handleNumberClick(num)}
+            onClick={() => num !== null && handleNumberClick(num)}
           >
             {num}
           </Card>
@@ -140,4 +146,5 @@ const Card = styled.button`
   border: none;
   background-color: ${({ theme }) => theme.colors.card};
   cursor: pointer;
+  visibility: ${({ children }) => (children === null ? "hidden" : "visible")};
 `;
