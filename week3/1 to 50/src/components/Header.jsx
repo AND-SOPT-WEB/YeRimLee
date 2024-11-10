@@ -35,13 +35,12 @@ const Header = ({ timer, handleView, currentView, setTimer }) => {
 };
 
 export default Header;
-
 const GameHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background-color: ${(props) => props.theme.colors.header};
+  background-color: ${({ theme }) => theme.colors.header};
 `;
 
 const HeaderLeft = styled.div`
@@ -50,8 +49,8 @@ const HeaderLeft = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: ${(props) => props.theme.fontSize.large};
-  color: ${(props) => props.theme.colors.text};
+  font-size: ${({ theme }) => theme.fontSize.large};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const ButtonGroup = styled.div`
@@ -61,15 +60,15 @@ const ButtonGroup = styled.div`
 
 const Button = styled.button`
   padding: 1rem;
-  background-color: ${(props) => props.theme.colors.header};
-  color: ${(props) => props.theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.header};
+  color: ${({ theme }) => theme.colors.text};
   border: none;
   border-radius: 4px;
-  font-size: ${(props) => props.theme.fontSize.medium};
+  font-size: ${({ theme }) => theme.fontSize.medium};
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.hover};
+    background-color: ${({ theme }) => theme.colors.hover};
   }
 `;
 
@@ -81,7 +80,7 @@ const LevelSelectContainer = styled.div`
 
 const Select = styled.select`
   padding: 10px;
-  font-size: ${(props) => props.theme.fontSize.medium};
+  font-size: ${({ theme }) => theme.fontSize.medium};
   border-radius: 4px;
   border: 1px solid #ccc;
   background-color: ${({ theme }) => theme.colors.header};
@@ -89,6 +88,6 @@ const Select = styled.select`
 `;
 
 const TimerDisplay = styled.p`
-  font-size: ${(props) => props.theme.fontSize.medium};
-  color: ${(props) => props.theme.colors.text};
+  font-size: ${({ theme }) => theme.fontSize.medium};
+  color: ${({ theme }) => theme.colors.text};
 `;

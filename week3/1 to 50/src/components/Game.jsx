@@ -69,7 +69,7 @@ const Game = ({ timer, setTimer }) => {
       interval = setInterval(() => {
         setTimer((prev) => parseFloat((prev + 0.01).toFixed(2)));
       }, 10);
-    } else if (!isRunning && timer !== 0) {
+    } else if (timer !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
