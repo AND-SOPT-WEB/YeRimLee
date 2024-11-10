@@ -10,10 +10,11 @@ const Game = ({ timer, setTimer, level }) => {
     return initialNumbers.sort(() => Math.random() - 0.5);
   });
   const [nextNumber, setNextNumber] = useState(1);
-  const [isRunning, setIsRunning] = useState(false);
   const [remainingNumbers, setRemainingNumbers] = useState(
     Array.from({ length: 9 }, (_, i) => i + 10)
   );
+
+  let interval;
 
   // 최초 1~9
   const initializeNumbers = useCallback(() => {
@@ -29,8 +30,11 @@ const Game = ({ timer, setTimer, level }) => {
   // 숫자 클릭 핸들러
   const handleNumberClick = (num) => {
     if (num === nextNumber) {
-      if (!isRunning) {
-        setIsRunning(true);
+      // 1 클릭 시, 타이머 시작
+      if (nextNumber === 1 && !interval) {
+        interval = setInterval(() => {
+          setTimer((prev) => parseFloat((prev + 0.01).toFixed(2)));
+        }, 10);
       }
 
       // nextNumber 증가
@@ -60,36 +64,25 @@ const Game = ({ timer, setTimer, level }) => {
 
         return updatedNumbers;
       });
+
+      // 게임 종료 시 타이머 멈추기
+      if (nextNumber === 18) {
+        clearInterval(interval);
+        saveGameRecord(1, timer);
+        alert(`Game Over! Time: ${timer} seconds`);
+        initializeGame();
+      }
     }
   };
-  // 타이머
-  useEffect(() => {
-    let interval;
-    if (isRunning) {
-      interval = setInterval(() => {
-        setTimer((prev) => parseFloat((prev + 0.01).toFixed(2)));
-      }, 10);
-    } else if (timer !== 0) {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [isRunning]);
-
-  // 게임 종료 후 알림 및 초기화
-  useEffect(() => {
-    if (nextNumber > 18) {
-      saveGameRecord(1, timer);
-      alert(`Game Over! Time: ${timer} seconds`);
-      initializeGame();
-    }
-  }, [nextNumber, timer]);
 
   // 게임 초기화 함수
   const initializeGame = () => {
     setNextNumber(1);
     setTimer(0);
-    setIsRunning(false);
     initializeNumbers();
+    if (interval) {
+      clearInterval(interval);
+    }
   };
 
   // 레벨 변경 시 게임 초기화
@@ -99,6 +92,8 @@ const Game = ({ timer, setTimer, level }) => {
 
   return (
     <GameContainer>
+      <NextNumberDisplay>Next Number: {nextNumber}</NextNumberDisplay>
+
       <Board>
         {numbers.map((num, index) => (
           <Card
@@ -120,6 +115,11 @@ const GameContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+`;
+
+const NextNumberDisplay = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.large};
+  font-weight: bold;
 `;
 
 const Board = styled.div`
