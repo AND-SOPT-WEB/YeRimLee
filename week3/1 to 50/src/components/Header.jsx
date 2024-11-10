@@ -1,15 +1,8 @@
 /* eslint-disable react/prop-types */
 import styled from "@emotion/styled";
 
-const Header = ({ timer, handleView, currentView, setTimer }) => {
+const Header = ({ timer, handleView, currentView, handleLevel }) => {
   // 추후 level 반영
-
-  // 레벨 변경 핸들러
-  const handleLevelChange = () => {
-    setTimer(0); // 타이머 초기화
-
-    setTimeout(() => {}, 500); // 500ms 후에 실행
-  };
 
   return (
     <GameHeader>
@@ -22,7 +15,7 @@ const Header = ({ timer, handleView, currentView, setTimer }) => {
       </HeaderLeft>
       {currentView === "게임" && (
         <LevelSelectContainer>
-          <Select onClick={handleLevelChange}>
+          <Select onChange={handleLevel}>
             <option value={1}>레벨 1</option>
             <option value={2}>레벨 2</option>
             <option value={3}>레벨 3</option>

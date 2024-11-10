@@ -8,11 +8,18 @@ import { useState } from "react";
 function App() {
   const [timer, setTimer] = useState(0);
   const [currentView, setCurrentView] = useState("게임");
+  const [level, setLevel] = useState(1);
 
   // 렌더링 컨텐츠
   const handleView = (event) => {
     const viewName = event.target.textContent;
     setCurrentView(viewName);
+  };
+
+  // 레벨 변경
+  const handleLevel = (event) => {
+    const gameLevel = parseInt(event.target.value, 10);
+    setLevel(gameLevel);
   };
 
   return (
@@ -21,9 +28,11 @@ function App() {
         timer={timer}
         handleView={handleView}
         currentView={currentView}
-        setTimer={setTimer}
+        handleLevel={handleLevel}
       />
-      {currentView === "게임" && <Game timer={timer} setTimer={setTimer} />}
+      {currentView === "게임" && (
+        <Game timer={timer} setTimer={setTimer} level={level} />
+      )}
       {currentView === "랭킹" && <LankBoard />}
     </ThemeProvider>
   );

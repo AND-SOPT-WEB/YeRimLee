@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
 import { saveGameRecord } from "../util/gameRecord";
 
-const Game = ({ timer, setTimer }) => {
+const Game = ({ timer, setTimer, level }) => {
   const [numbers, setNumbers] = useState(() => {
     const initialNumbers = Array.from({ length: 9 }, (_, i) => i + 1);
     return initialNumbers.sort(() => Math.random() - 0.5);
@@ -75,7 +75,7 @@ const Game = ({ timer, setTimer }) => {
     return () => clearInterval(interval);
   }, [isRunning]);
 
-  // 초기화
+  // 게임 종료 후 알림 및 초기화
   useEffect(() => {
     if (nextNumber > 18) {
       saveGameRecord(1, timer);
@@ -91,6 +91,11 @@ const Game = ({ timer, setTimer }) => {
     setIsRunning(false);
     initializeNumbers();
   };
+
+  // 레벨 변경 시 게임 초기화
+  useEffect(() => {
+    initializeGame();
+  }, [level]);
 
   return (
     <GameContainer>
