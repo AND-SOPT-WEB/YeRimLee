@@ -22,6 +22,7 @@ const StyledButton = styled.button`
   color: ${({ theme }) => theme.colors.whiteText};
   border-radius: 5px;
   font-size: ${({ theme }) => theme.fontSize.medium};
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.header};
