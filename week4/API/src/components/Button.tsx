@@ -22,7 +22,6 @@ const StyledButton = styled.button`
   color: ${({ theme }) => theme.colors.whiteText};
   border-radius: 5px;
   font-size: ${({ theme }) => theme.fontSize.medium};
-  cursor: pointer;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.header};

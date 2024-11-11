@@ -7,7 +7,6 @@ const globalStyles = css`
 
   html {
     font-size: 62.5%;
-    background-color: "#FEF3E2"; // 여긴 왜 scpt가 안먹히는가...
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0%);
