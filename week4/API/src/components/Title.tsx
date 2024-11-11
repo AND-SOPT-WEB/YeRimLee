@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 interface TitleProps {
   title: string;
-  fontSize?: "large" | "medium";
+  fontSize?: "large" | "medium" | "small";
 }
 
 const Title = ({ title, fontSize = "large" }: TitleProps) => {
@@ -11,9 +11,16 @@ const Title = ({ title, fontSize = "large" }: TitleProps) => {
 
 export default Title;
 
-const StyledTitle = styled.h2<{ fontSize: "large" | "medium" }>`
+const StyledTitle = styled.h2<{ fontSize: "large" | "medium" | "small" }>`
   font-size: ${({ theme, fontSize }) => theme.fontSize[fontSize]};
-  margin-bottom: ${({ fontSize }) => (fontSize === "large" ? "2rem" : "1rem")};
+  margin: ${({ fontSize }) =>
+    fontSize === "large"
+      ? "2rem 0"
+      : fontSize === "medium"
+      ? "0.5rem 0"
+      : "0.2rem 0"};
   align-self: ${({ fontSize }) =>
-    fontSize === "medium" ? "flex-start" : "center"};
+    fontSize !== "large" ? "flex-start" : "center"};
+  color: ${({ theme, fontSize }) =>
+    fontSize === "small" ? theme.colors.header : ""};
 `;
