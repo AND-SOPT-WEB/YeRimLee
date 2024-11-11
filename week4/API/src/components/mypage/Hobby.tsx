@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import Title from "./common/Titlte";
-import Input from "./common/Input";
-import Button from "./common/Button";
+import Title from "../common/Title";
+import Input from "../common/Input";
+import Button from "../common/Button";
 
 const Hobby = () => {
   return (

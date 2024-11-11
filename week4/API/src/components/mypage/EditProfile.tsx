@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Title from "../common/Titlte";
+import Title from "../common/Title";
 import Input from "../common/Input";
 import Button from "../common/Button";
 

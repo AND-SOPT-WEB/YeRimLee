@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
-import Title from "../components/common/Titlte";
+import Title from "../components/common/Title";
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
 import SmallLink from "../components/common/SmallLink";

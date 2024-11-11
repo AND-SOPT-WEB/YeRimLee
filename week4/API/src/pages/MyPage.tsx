@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/mypage/Header";
-import Hobby from "../components/Hobby";
+import Hobby from "../components/mypage/Hobby";
 import EditProfile from "../components/mypage/EditProfile";
 
 const MyPage = () => {
