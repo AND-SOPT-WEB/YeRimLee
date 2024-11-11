@@ -17,7 +17,7 @@ export default Input;
 const StyledInput = styled.input`
   width: 100%;
   padding: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: ${({ theme }) => theme.fontSize.medium};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 5px;
