@@ -7,6 +7,9 @@ declare module "@emotion/react" {
       background: string;
       button: string;
       header: string;
+      border: string;
+      text: string;
+      whiteText: string;
     };
     fontSize: {
       large: string;
