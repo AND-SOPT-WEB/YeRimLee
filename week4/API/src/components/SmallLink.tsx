@@ -3,13 +3,14 @@ import styled from "@emotion/styled";
 interface SmallLinkProps {
   text: string;
   showDesc?: boolean;
+  onClick?: () => void;
 }
 
-const SmallLink = ({ text, showDesc = false }: SmallLinkProps) => {
+const SmallLink = ({ text, showDesc = false, onClick }: SmallLinkProps) => {
   return (
     <Container>
       {showDesc && <Desc>이미 회원이신가요?</Desc>}
-      <Link>{text}</Link>
+      <Link onClick={onClick}>{text}</Link>
     </Container>
   );
 };

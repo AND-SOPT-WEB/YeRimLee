@@ -1,18 +1,25 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 import Title from "../components/Title";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import SmallLink from "../components/SmallLink";
 
 const Login = () => {
+  const nav = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    nav(path);
+  };
+
   return (
     <Container>
       <FormLayout>
         <Title title="로그인" />
         <Input text="아이디" />
         <Input text="비밀번호" />
-        <Button text="로그인" />
-        <SmallLink text="회원가입" />
+        <Button text="로그인" onClick={() => handleNavigation("/mypage")} />
+        <SmallLink text="회원가입" onClick={() => handleNavigation("/join")} />
       </FormLayout>
     </Container>
   );

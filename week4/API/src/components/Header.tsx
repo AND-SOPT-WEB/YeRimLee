@@ -2,9 +2,10 @@ import styled from "@emotion/styled";
 
 interface HeaderProps {
   handleTabClick: (tab: "hobby" | "profile") => void;
+  onClick?: () => void;
 }
 
-const Header = ({ handleTabClick }: HeaderProps) => {
+const Header = ({ handleTabClick, onClick }: HeaderProps) => {
   return (
     <Container>
       <HeaderLeftLayout>
@@ -14,7 +15,7 @@ const Header = ({ handleTabClick }: HeaderProps) => {
           <Tab onClick={() => handleTabClick("profile")}>내 정보</Tab>
         </Tabs>
       </HeaderLeftLayout>
-      <LogoutButton>로그아웃</LogoutButton>
+      <LogoutButton onClick={onClick}>로그아웃</LogoutButton>
     </Container>
   );
 };

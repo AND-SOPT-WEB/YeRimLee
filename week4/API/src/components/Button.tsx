@@ -2,12 +2,13 @@ import styled from "@emotion/styled";
 
 interface ButtonProps {
   text: string;
+  onClick?: () => void;
 }
 
-const Button = ({ text }: ButtonProps) => {
+const Button = ({ text, onClick }: ButtonProps) => {
   return (
     <>
-      <StyledButton>{text}</StyledButton>
+      <StyledButton onClick={onClick}>{text}</StyledButton>
     </>
   );
 };
