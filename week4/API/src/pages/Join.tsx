@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
-import Title from "../components/Title";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import SmallLink from "../components/SmallLink";
+import Title from "../components/common/Titlte";
+import Input from "../components/common/Input";
+import Button from "../components/common/Button";
+import SmallLink from "../components/common/SmallLink";
 
 const Join = () => {
   const nav = useNavigate();

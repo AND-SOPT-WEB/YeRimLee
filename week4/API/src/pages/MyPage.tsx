@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../components/mypage/Header";
 import Hobby from "../components/Hobby";
-import EditProfile from "../components/EditProfile";
+import EditProfile from "../components/mypage/EditProfile";
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState<"hobby" | "profile">("hobby");

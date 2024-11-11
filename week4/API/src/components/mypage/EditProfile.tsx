@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import Title from "./Title";
-import Input from "./Input";
-import Button from "./Button";
+import Title from "../common/Titlte";
+import Input from "../common/Input";
+import Button from "../common/Button";
 
 const EditProfile = () => {
   return (
