@@ -1,11 +1,20 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
-import Title from "../components/common/Titlte";
-import Input from "../components/common/Input";
-import Button from "../components/common/Button";
+import { useState } from "react";
+import Title from "../components/common/Title";
 import SmallLink from "../components/common/SmallLink";
+import Name from "../components/join/Name";
+import Password from "../components/join/Password";
+import Hobby from "../components/join/Hobby";
 
 const Join = () => {
+  // 회원가입 과정 퍼널
+  const [step, setStep] = useState("이름");
+
+  const handleNextStep = (path: string) => {
+    setStep(path);
+  };
+
   const nav = useNavigate();
 
   const handleLoginClick = () => {
@@ -16,9 +25,14 @@ const Join = () => {
     <Container>
       <FormLayout>
         <Title title="회원가입" />
-        <Title title="아이디" fontSize="medium" />
-        <Input text="사용자 이름을 입력해 주세요" />
-        <Button text="다음" />
+
+        {step === "이름" && (
+          <Name handleNextStep={() => handleNextStep("비밀번호")} />
+        )}
+        {step === "비밀번호" && (
+          <Password handleNextStep={() => handleNextStep("취미")} />
+        )}
+        {step === "취미" && <Hobby handleLoginClick={handleLoginClick} />}
         <SmallLink text="로그인" showDesc={true} onClick={handleLoginClick} />
       </FormLayout>
     </Container>
