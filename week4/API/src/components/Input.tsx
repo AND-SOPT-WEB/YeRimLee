@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 interface InputProps {
-  text: string;
+  text?: string;
 }
 
 const Input = ({ text }: InputProps) => {
