@@ -1,0 +1,12 @@
+export const theme = {
+  colors: {
+    background: "#FEF3E2",
+    button: "#BEC6A0",
+    header: "#708871",
+  },
+  fontSize: {
+    large: "24px",
+    medium: "18px",
+    small: "14px",
+  },
+};
