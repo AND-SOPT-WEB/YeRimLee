@@ -1,9 +1,9 @@
 import { Global, ThemeProvider } from "@emotion/react";
 import { theme } from "./styles/theme";
 import globalStyles from "./styles/global";
-import Join from "./components/Join";
-import Login from "./components/Login";
-import MyPage from "./components/MyPage";
+import Join from "./pages/Join";
+import Login from "./pages/Login";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
