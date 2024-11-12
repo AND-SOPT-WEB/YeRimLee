@@ -2,6 +2,7 @@ import { useState } from "react";
 import Title from "../common/Title";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import styled from "@emotion/styled";
 
 interface NameProps {
   handleNextStep: () => void;
@@ -26,9 +27,18 @@ const Name = ({ handleNextStep, getUserName }: NameProps) => {
         value={userName}
         onChange={handleChange}
       />
+      {userName.length >= 8 && (
+        <ErrorMessage>8자 이내로 입력해주세요.</ErrorMessage>
+      )}
       <Button text="다음" onClick={handleNextStep} disabled={!nameBtnActive} />
     </>
   );
 };
+
+const ErrorMessage = styled.div`
+  color: ${({ theme }) => theme.colors.error};
+  font-size: ${({ theme }) => theme.fontSize.small};
+  align-self: flex-start;
+`;
 
 export default Name;

@@ -6,6 +6,7 @@ export const theme = {
     border: "#ccc;",
     text: "#606676",
     whiteText: "#fff",
+    error: "#FF4545",
   },
   fontSize: {
     large: "24px",

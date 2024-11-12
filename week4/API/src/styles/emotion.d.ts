@@ -10,6 +10,7 @@ declare module "@emotion/react" {
       border: string;
       text: string;
       whiteText: string;
+      error: string;
     };
     fontSize: {
       large: string;
