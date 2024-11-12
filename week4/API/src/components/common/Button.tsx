@@ -3,13 +3,14 @@ import styled from "@emotion/styled";
 interface ButtonProps {
   text: string;
   onClick?: (e: React.FormEvent) => void;
+  disabled?: boolean;
 }
 
-const Button = ({ text, onClick }: ButtonProps) => {
+const Button = ({ text, onClick, disabled }: ButtonProps) => {
   return (
-    <>
-      <StyledButton onClick={onClick}>{text}</StyledButton>
-    </>
+    <StyledButton onClick={onClick} disabled={disabled}>
+      {text}
+    </StyledButton>
   );
 };
 
@@ -27,5 +28,10 @@ const StyledButton = styled.button`
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.header};
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.background};
+    cursor: not-allowed;
   }
 `;
