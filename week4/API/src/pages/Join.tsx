@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios, { AxiosError } from "axios";
 import Title from "../components/common/Title";
 import SmallLink from "../components/common/SmallLink";
 import Name from "../components/join/Name";
@@ -8,18 +9,48 @@ import Password from "../components/join/Password";
 import Hobby from "../components/join/Hobby";
 
 const Join = () => {
-  // 회원가입 과정 퍼널
+  // 회원가입 과정 퍼털
   const [step, setStep] = useState("이름");
+  // 회원가입 정보
+  const [userName, setUserName] = useState("");
+  const [userPw, setUserPw] = useState("");
+  const [userHobby, setUserHobby] = useState("");
 
   const handleNextStep = (path: string) => {
     setStep(path);
   };
-
   const nav = useNavigate();
 
   const handleLoginClick = () => {
     nav("/");
   };
+
+  // 회원가입 데이터 전송 함수
+  const submitForm = async () => {
+    try {
+      const postJoinData = await axios.post(
+        `${import.meta.env.VITE_APP_BASE_URL}/user`,
+        {
+          username: userName,
+          password: userPw,
+          hobby: userHobby,
+        }
+      );
+      console.log(postJoinData);
+      alert("회원가입 성공! 회원번호 렌더링 해야함");
+      nav("/");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert("에러발생");
+      }
+      console.log(error);
+    }
+  };
+
+  // 정보 가져오기
+  const getUserName = (value: string) => setUserName(value);
+  const getUserPw = (value: string) => setUserPw(value);
+  const getUserHobby = (value: string) => setUserHobby(value);
 
   return (
     <Container>
@@ -27,12 +58,20 @@ const Join = () => {
         <Title title="회원가입" />
 
         {step === "이름" && (
-          <Name handleNextStep={() => handleNextStep("비밀번호")} />
+          <Name
+            getUserName={getUserName}
+            handleNextStep={() => handleNextStep("비밀번호")}
+          />
         )}
         {step === "비밀번호" && (
-          <Password handleNextStep={() => handleNextStep("취미")} />
+          <Password
+            getUserPw={getUserPw}
+            handleNextStep={() => handleNextStep("취미")}
+          />
         )}
-        {step === "취미" && <Hobby handleLoginClick={handleLoginClick} />}
+        {step === "취미" && (
+          <Hobby getUserHobby={getUserHobby} submitForm={submitForm} />
+        )}
         <SmallLink text="로그인" showDesc={true} onClick={handleLoginClick} />
       </FormLayout>
     </Container>

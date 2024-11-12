@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 interface ButtonProps {
   text: string;
-  onClick?: () => void;
+  onClick?: (e: React.FormEvent) => void;
 }
 
 const Button = ({ text, onClick }: ButtonProps) => {
