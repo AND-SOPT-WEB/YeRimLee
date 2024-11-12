@@ -2,6 +2,7 @@ import { useState } from "react";
 import Title from "../common/Title";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import styled from "@emotion/styled";
 
 interface HobbyProps {
   getUserHobby: (value: string) => void;
@@ -32,6 +33,9 @@ const Hobby = ({ getUserHobby, submitForm }: HobbyProps) => {
         value={userHobby}
         onChange={handleChange}
       />
+      {userHobby.length >= 8 && (
+        <ErrorMessage>8자 이내로 입력해주세요.</ErrorMessage>
+      )}
       <Button
         text="회원가입"
         onClick={handleSubmit}
@@ -40,5 +44,10 @@ const Hobby = ({ getUserHobby, submitForm }: HobbyProps) => {
     </>
   );
 };
+const ErrorMessage = styled.div`
+  color: ${({ theme }) => theme.colors.error};
+  font-size: ${({ theme }) => theme.fontSize.small};
+  align-self: flex-start;
+`;
 
 export default Hobby;
