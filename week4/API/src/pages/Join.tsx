@@ -41,7 +41,7 @@ const Join = () => {
       nav("/");
     } catch (error) {
       if (error instanceof AxiosError) {
-        alert("에러발생");
+        alert("회원가입에 실패!");
       }
       console.log(error);
     }
