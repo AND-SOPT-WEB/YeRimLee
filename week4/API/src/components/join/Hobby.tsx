@@ -18,9 +18,7 @@ const Hobby = ({ getUserHobby, submitForm }: HobbyProps) => {
     getUserHobby(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // 폼 제출 시 리로드 방지
-
+  const handleSubmit = () => {
     submitForm();
     console.log("회원가입 완!");
   };

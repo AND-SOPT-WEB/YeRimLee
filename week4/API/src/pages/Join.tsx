@@ -85,7 +85,7 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const FormLayout = styled.form`
+const FormLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
