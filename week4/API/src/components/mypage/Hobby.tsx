@@ -3,13 +3,20 @@ import Title from "../common/Title";
 import Input from "../common/Input";
 import Button from "../common/Button";
 
-const Hobby = () => {
+interface HobbyProps {
+  hobby: string | null;
+}
+
+const Hobby = ({ hobby }: HobbyProps) => {
   return (
     <Container>
       <FormLayout>
         <Title title="취미" />
         <Title title="나의 취미" fontSize="medium" />
-        <Title title="독서" fontSize="small" />
+        <Title
+          title={hobby ? hobby : "취미 정보가 없습니다."}
+          fontSize="small"
+        />
         <Title title="다른 사람들의 취미" fontSize="medium" />
         <Input text="사용자 번호" />
         <Button text="검색" />

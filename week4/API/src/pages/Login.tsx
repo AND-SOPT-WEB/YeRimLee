@@ -26,7 +26,11 @@ const Login = () => {
           password: userPw,
         }
       );
-      nav("/mypage"); //일단은..
+      const token = postData.data.result.token;
+      if (token) {
+        localStorage.setItem("token", token);
+        nav("/mypage");
+      }
 
       console.log(postData);
       console.log("일단 로그인 성공");
