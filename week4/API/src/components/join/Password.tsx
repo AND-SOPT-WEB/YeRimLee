@@ -11,7 +11,11 @@ interface HobbyProps {
 const Password = ({ handleNextStep, getUserPw }: HobbyProps) => {
   const [userPw, setUserPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
-  const isPwFieldsFull = userPw && confirmPw;
+
+  const isPasswordValid = userPw && confirmPw && userPw === confirmPw;
+  const isPasswordLengthValid = userPw && userPw.length < 8;
+
+  const pwBtnActive = isPasswordValid && isPasswordLengthValid;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     getUserPw(e.target.value);
@@ -22,6 +26,7 @@ const Password = ({ handleNextStep, getUserPw }: HobbyProps) => {
     getUserPw(e.target.value);
     setConfirmPw(e.target.value);
   };
+
   return (
     <>
       <Title title="비밀번호" fontSize="medium" />
@@ -35,7 +40,7 @@ const Password = ({ handleNextStep, getUserPw }: HobbyProps) => {
         value={confirmPw}
         onChange={handleConfirmChange}
       />
-      <Button text="다음" onClick={handleNextStep} disabled={!isPwFieldsFull} />
+      <Button text="다음" onClick={handleNextStep} disabled={!pwBtnActive} />
     </>
   );
 };

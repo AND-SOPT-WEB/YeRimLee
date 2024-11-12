@@ -11,6 +11,8 @@ interface NameProps {
 const Name = ({ handleNextStep, getUserName }: NameProps) => {
   const [userName, setUserName] = useState("");
 
+  const nameBtnActive = userName && userName.length < 8;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
     getUserName(e.target.value);
@@ -24,7 +26,7 @@ const Name = ({ handleNextStep, getUserName }: NameProps) => {
         value={userName}
         onChange={handleChange}
       />
-      <Button text="다음" onClick={handleNextStep} disabled={!userName} />
+      <Button text="다음" onClick={handleNextStep} disabled={!nameBtnActive} />
     </>
   );
 };

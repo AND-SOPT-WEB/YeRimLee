@@ -10,6 +10,7 @@ interface HobbyProps {
 
 const Hobby = ({ getUserHobby, submitForm }: HobbyProps) => {
   const [userHobby, setUserHobby] = useState("");
+  const hobbyBtnActive = userHobby && userHobby.length < 8;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserHobby(e.target.value);
@@ -31,7 +32,11 @@ const Hobby = ({ getUserHobby, submitForm }: HobbyProps) => {
         value={userHobby}
         onChange={handleChange}
       />
-      <Button text="회원가입" onClick={handleSubmit} disabled={!userHobby} />
+      <Button
+        text="회원가입"
+        onClick={handleSubmit}
+        disabled={!hobbyBtnActive}
+      />
     </>
   );
 };
