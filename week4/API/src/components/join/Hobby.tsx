@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Title from "../common/Title";
 import Input from "../common/Input";
 import Button from "../common/Button";
@@ -8,7 +9,10 @@ interface HobbyProps {
 }
 
 const Hobby = ({ getUserHobby, submitForm }: HobbyProps) => {
+  const [userHobby, setUserHobby] = useState("");
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserHobby(e.target.value);
     getUserHobby(e.target.value);
   };
 
@@ -22,8 +26,12 @@ const Hobby = ({ getUserHobby, submitForm }: HobbyProps) => {
   return (
     <>
       <Title title="취미" fontSize="medium" />
-      <Input text="취미를 입력해 주세요" onChange={handleChange} />
-      <Button text="회원가입" onClick={handleSubmit} />
+      <Input
+        text="취미를 입력해 주세요"
+        value={userHobby}
+        onChange={handleChange}
+      />
+      <Button text="회원가입" onClick={handleSubmit} disabled={!userHobby} />
     </>
   );
 };

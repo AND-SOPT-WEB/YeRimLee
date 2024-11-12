@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Title from "../common/Title";
-import Input from "../common/Input"; // Input 컴포넌트 유지
-import Button from "../common/Button"; // Button 컴포넌트 유지
+import Input from "../common/Input";
+import Button from "../common/Button";
 
 interface NameProps {
   handleNextStep: () => void;
@@ -9,11 +9,11 @@ interface NameProps {
 }
 
 const Name = ({ handleNextStep, getUserName }: NameProps) => {
-  const [userName, setUserName] = useState(""); // 사용자 이름 상태 추가
+  const [userName, setUserName] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value); // 입력값 상태 업데이트
-    getUserName(e.target.value); // 부모 컴포넌트로 값 전달
+    setUserName(e.target.value);
+    getUserName(e.target.value);
   };
 
   return (
@@ -24,11 +24,7 @@ const Name = ({ handleNextStep, getUserName }: NameProps) => {
         value={userName}
         onChange={handleChange}
       />
-      <Button
-        text="다음"
-        onClick={handleNextStep}
-        disabled={!userName} // 입력값이 비어 있으면 버튼 비활성화
-      />
+      <Button text="다음" onClick={handleNextStep} disabled={!userName} />
     </>
   );
 };
