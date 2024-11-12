@@ -22,6 +22,11 @@ const EditProfile = () => {
 
   // 유저 정보 수정 API 호출 함수
   const updateUserInfo = async () => {
+    if (!newPassword && !newHobby) {
+      alert("비밀번호와 취미를 입력해주세요!");
+      return;
+    }
+
     const token = localStorage.getItem("token");
 
     if (!token) {
