@@ -48,13 +48,16 @@ const MyPage = () => {
 
   const nav = useNavigate();
 
-  const handleLoginClick = () => {
+  // 로그아웃 핸들러
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+
     nav("/");
   };
 
   return (
     <>
-      <Header handleTabClick={handleTabClick} onClick={handleLoginClick} />
+      <Header handleTabClick={handleTabClick} onClick={handleLogout} />
       {activeTab === "hobby" ? <Hobby hobby={hobby} /> : <EditProfile />}
     </>
   );
