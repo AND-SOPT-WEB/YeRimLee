@@ -7,8 +7,13 @@ const LankBoard = () => {
     JSON.parse(localStorage.getItem("gameResults")) || []
   );
 
-  // 플레이 시간이 짧은 순서대로 정렬
-  const sortedData = storedData.sort((a, b) => a.playTime - b.playTime);
+  // 레벨 높은 순 > 플레이 시간이 짧은 순서대로 정렬
+  const sortedData = storedData.sort((a, b) => {
+    if (b.level !== a.level) {
+      return b.level - a.level;
+    }
+    return a.playTime - b.playTime;
+  });
 
   // 초기화 버튼 클릭 핸들러
   const handleReset = () => {
