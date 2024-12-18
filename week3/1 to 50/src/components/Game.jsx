@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
-import { useState, useEffect, useCallback } from "react";
+/* eslint-disable react/prop-types */ import {
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import styled from "@emotion/styled";
 import { saveGameRecord } from "../util/gameRecord";
 
 const Game = ({ timer, setTimer, level }) => {
-  // 초기 숫자카드
   const [numbers, setNumbers] = useState([]);
-  // 절반 이후 숫자카드
   const [nextNumber, setNextNumber] = useState(1);
-
+  const [clickedCard, setClickedCard] = useState(null);
   const [remainingNumbers, setRemainingNumbers] = useState([]);
   const gridSize = level + 2;
   const totalCards = gridSize * gridSize * 2;
@@ -24,15 +25,20 @@ const Game = ({ timer, setTimer, level }) => {
       .sort(() => Math.random() - 0.5);
     setNumbers(shuffledInitialNumbers);
 
-    // 남은 숫자 배열 설정
     setRemainingNumbers(
       initialNumbers.slice(totalCards / 2).sort(() => Math.random() - 0.5)
     );
   }, [totalCards]);
 
   // 숫자 클릭 핸들러
-  const handleNumberClick = (num) => {
+  const handleNumberClick = (num, index) => {
     if (num === nextNumber) {
+      // 클릭된 카드 상태 업데이트
+      setClickedCard(index);
+
+      // 클릭 효과 제거를 위해 짧은 시간 후 초기화
+      setTimeout(() => setClickedCard(null), 300);
+
       // 1 클릭 시 타이머 시작
       if (nextNumber === 1 && !interval) {
         interval = setInterval(() => {
@@ -40,7 +46,7 @@ const Game = ({ timer, setTimer, level }) => {
         }, 10);
       }
 
-      // nextNumber 증가
+      // 다음 숫자로 이동
       setNextNumber((prev) => prev + 1);
 
       // 클릭한 숫자 자리 업데이트
@@ -93,7 +99,8 @@ const Game = ({ timer, setTimer, level }) => {
         {numbers.map((num, index) => (
           <Card
             key={`card-${num}-${index}`}
-            onClick={() => num !== null && handleNumberClick(num)}
+            isClicked={clickedCard === index} 
+            onClick={() => num !== null && handleNumberClick(num, index)}
           >
             {num}
           </Card>
@@ -133,7 +140,11 @@ const Card = styled.button`
   justify-content: center;
   border-radius: 8px;
   border: none;
-  background-color: ${({ theme }) => theme.colors.card};
   cursor: pointer;
+  background-color: ${({ isClicked, theme }) =>
+    isClicked ? theme.colors.highlight : theme.colors.card};
+  color: ${({ theme }) => theme.colors.text};
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  transform: ${({ isClicked }) => (isClicked ? "scale(1.1)" : "scale(1)")};
   visibility: ${({ children }) => (children === null ? "hidden" : "visible")};
 `;
