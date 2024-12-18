@@ -5,32 +5,35 @@ import styled from "@emotion/styled";
 import { saveGameRecord } from "../util/gameRecord";
 
 const Game = ({ timer, setTimer, level }) => {
-  const [numbers, setNumbers] = useState(() => {
-    const initialNumbers = Array.from({ length: 9 }, (_, i) => i + 1);
-    return initialNumbers.sort(() => Math.random() - 0.5);
-  });
+  // 초기 숫자카드
+  const [numbers, setNumbers] = useState([]);
+  // 절반 이후 숫자카드
   const [nextNumber, setNextNumber] = useState(1);
-  const [remainingNumbers, setRemainingNumbers] = useState(
-    Array.from({ length: 9 }, (_, i) => i + 10)
-  );
+
+  const [remainingNumbers, setRemainingNumbers] = useState([]);
+  const gridSize = level + 2;
+  const totalCards = gridSize * gridSize * 2;
 
   let interval;
 
-  // 최초 1~9
+  // 초기화 함수: 숫자 배열 생성
   const initializeNumbers = useCallback(() => {
-    const initialNumbers = Array.from({ length: 9 }, (_, i) => i + 1);
-    const shuffledInitialNumbers = initialNumbers.sort(
-      () => Math.random() - 0.5
-    );
+    const initialNumbers = Array.from({ length: totalCards }, (_, i) => i + 1);
+    const shuffledInitialNumbers = initialNumbers
+      .slice(0, totalCards / 2)
+      .sort(() => Math.random() - 0.5);
     setNumbers(shuffledInitialNumbers);
-    // 이후 10~18
-    setRemainingNumbers(Array.from({ length: 9 }, (_, i) => i + 10));
-  }, []);
+
+    // 남은 숫자 배열 설정
+    setRemainingNumbers(
+      initialNumbers.slice(totalCards / 2).sort(() => Math.random() - 0.5)
+    );
+  }, [totalCards]);
 
   // 숫자 클릭 핸들러
   const handleNumberClick = (num) => {
     if (num === nextNumber) {
-      // 1 클릭 시, 타이머 시작
+      // 1 클릭 시 타이머 시작
       if (nextNumber === 1 && !interval) {
         interval = setInterval(() => {
           setTimer((prev) => parseFloat((prev + 0.01).toFixed(2)));
@@ -40,58 +43,44 @@ const Game = ({ timer, setTimer, level }) => {
       // nextNumber 증가
       setNextNumber((prev) => prev + 1);
 
-      // 클릭한 숫자의 인덱스를 찾고, 해당 위치에 새로운 숫자를 추가
+      // 클릭한 숫자 자리 업데이트
       setNumbers((prev) => {
         const indexToReplace = prev.indexOf(num);
         const updatedNumbers = [...prev];
+        updatedNumbers[indexToReplace] = null; // 빈 자리로 설정
 
-        // 클릭한 숫자 자리를 빈자리로 만들어서 비어 보이게 함
-        updatedNumbers.splice(indexToReplace, 1, null);
-
-        // 10~18에서 무작위로 다음 숫자 선택
         if (remainingNumbers.length > 0) {
-          const randomIndex = Math.floor(
-            Math.random() * remainingNumbers.length
-          );
-          const nextRandomNumber = remainingNumbers[randomIndex];
-
-          // 선택한 숫자를 제외한 나머지 숫자 리스트
-          const updatedRemainingNumbers = remainingNumbers.filter(
-            (n) => n !== nextRandomNumber
-          );
-
-          setRemainingNumbers(updatedRemainingNumbers);
-
-          // 클릭한 숫자의 자리에 새 숫자를 추가
-          updatedNumbers.splice(indexToReplace, 1, nextRandomNumber);
+          const [nextRandomNumber, ...updatedRemaining] = remainingNumbers;
+          updatedNumbers[indexToReplace] = nextRandomNumber;
+          setRemainingNumbers(updatedRemaining);
         }
 
         return updatedNumbers;
       });
 
-      // 게임 종료 시 타이머 멈추기
-      if (nextNumber === 18) {
+      // 게임 종료 시 타이머 멈춤
+      if (nextNumber === totalCards) {
         clearInterval(interval);
-        saveGameRecord(1, timer);
+        saveGameRecord(level, timer);
         alert(`Game Over! Time: ${timer} seconds`);
         initializeGame();
       }
     }
   };
 
-  // 타이머
+  // 타이머 정리
   useEffect(() => {
     return () => clearInterval(interval);
   }, [interval]);
 
-  // 게임 초기화 함수
+  // 게임 초기화
   const initializeGame = () => {
     setNextNumber(1);
     setTimer(0);
     initializeNumbers();
   };
 
-  // 레벨 변경 시 게임 초기화
+  // 레벨 변경 시 초기화
   useEffect(() => {
     initializeGame();
   }, [level]);
@@ -100,7 +89,7 @@ const Game = ({ timer, setTimer, level }) => {
     <GameContainer>
       <NextNumberDisplay>Next Number: {nextNumber}</NextNumberDisplay>
 
-      <Board>
+      <Board gridSize={gridSize}>
         {numbers.map((num, index) => (
           <Card
             key={`card-${num}-${index}`}
@@ -130,14 +119,14 @@ const NextNumberDisplay = styled.div`
 
 const Board = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(${({ gridSize }) => gridSize}, 1fr);
   gap: 1rem;
   margin-top: 2rem;
 `;
 
 const Card = styled.button`
-  width: 8rem;
-  height: 8rem;
+  width: 6rem;
+  height: 6rem;
   font-size: 24px;
   display: flex;
   align-items: center;
